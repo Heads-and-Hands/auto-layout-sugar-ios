@@ -1,0 +1,11 @@
+framework module AutoLayoutSugar {
+  umbrella header "AutoLayoutSugar.h"
+
+  export *
+  module * { export * }
+}
+
+module AutoLayoutSugar.Swift {
+    header "AutoLayoutSugar-Swift.h"
+    requires objc
+}
