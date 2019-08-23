@@ -3,6 +3,13 @@
 
 [![Language: Swift 4.0](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat")](https://developer.apple.com/swift) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
+### Installation via Carthage
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate this framework into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "Heads-and-Hands/auto-layout-sugar-ios"
+```
+
 ### Usage
 ##### Prepare for auto layout
 All we know, that auto layout engine switches on only if we'll set view's translatesAutoresizingMaskIntoConstraints property to false.
