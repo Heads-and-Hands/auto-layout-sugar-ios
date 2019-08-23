@@ -1,0 +1,30 @@
+excluded:
+  - Carthage
+
+disabled_rules:
+  - trailing_comma
+
+opt_in_rules:
+  - attributes
+  - closure_end_indentation
+  - closure_parameter_position
+  - closure_spacing
+  - empty_count
+  - explicit_init
+  - first_where
+  - force_unwrapping
+  - nimble_operator
+  - number_separator
+  - overridden_super_call
+  - private_outlet
+  - prohibited_super_call
+  - redundant_nil_coalescing
+  - sorted_imports
+  - switch_case_on_newline
+
+function_body_length:
+  warning: 100
+  error: 200
+number_separator:
+  minimum_length: 6
+line_length: 150
