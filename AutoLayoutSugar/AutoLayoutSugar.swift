@@ -135,13 +135,13 @@ public extension UIView {
 
         switch side.rawValue {
         case "top":
-            safeTopAnchor ~= relatedView.safeTopAnchor + offset
+            safeTopAnchor ~ relatedView.safeTopAnchor + offset
         case "left":
-            safeLeadingAnchor ~= relatedView.safeLeadingAnchor + offset
+            safeLeadingAnchor ~ relatedView.safeLeadingAnchor + offset
         case "right":
-            safeTrailingAnchor ~= relatedView.safeTrailingAnchor - offset
+            safeTrailingAnchor ~ relatedView.safeTrailingAnchor - offset
         case "bottom":
-            safeBottomAnchor ~= relatedView.safeBottomAnchor - offset
+            safeBottomAnchor ~ relatedView.safeBottomAnchor - offset
         default:
             break
         }

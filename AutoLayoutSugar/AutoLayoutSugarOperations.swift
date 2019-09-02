@@ -8,24 +8,138 @@
 
 import UIKit
 
-struct ConstraintMultiplierAttribute<T: AnyObject> {
+public struct ConstraintMultiplierAttribute<T: AnyObject> {
     let anchor: NSLayoutAnchor<T>
     let multiplier: CGFloat
 }
 
-struct LayoutGuideMultiplierAttribute {
+public struct LayoutGuideMultiplierAttribute {
     let guide: UILayoutSupport
     let multiplier: CGFloat
 }
 
-struct ConstraintAttribute<T: AnyObject> {
+public struct ConstraintAttribute<T: AnyObject> {
     let anchor: NSLayoutAnchor<T>
     let const: CGFloat
 }
 
-struct LayoutGuideAttribute {
+public struct LayoutGuideAttribute {
     let guide: UILayoutSupport
     let const: CGFloat
+}
+
+// MARK: - Modifications
+
+public func + <T>(lhs: NSLayoutAnchor<T>, rhs: CGFloat) -> ConstraintAttribute<T> {
+    return ConstraintAttribute(anchor: lhs, const: rhs)
+}
+
+public func + (lhs: UILayoutSupport, rhs: CGFloat) -> LayoutGuideAttribute {
+    return LayoutGuideAttribute(guide: lhs, const: rhs)
+}
+
+public func + <T>(lhs: ConstraintAttribute<T>, rhs: CGFloat) -> ConstraintAttribute<T> {
+    return ConstraintAttribute(anchor: lhs.anchor, const: lhs.const + rhs)
+}
+
+public func - <T>(lhs: NSLayoutAnchor<T>, rhs: CGFloat) -> ConstraintAttribute<T> {
+    return ConstraintAttribute(anchor: lhs, const: -rhs)
+}
+
+public func - (lhs: UILayoutSupport, rhs: CGFloat) -> LayoutGuideAttribute {
+    return LayoutGuideAttribute(guide: lhs, const: -rhs)
+}
+
+public func - <T>(lhs: ConstraintAttribute<T>, rhs: CGFloat) -> ConstraintAttribute<T> {
+    return ConstraintAttribute(anchor: lhs.anchor, const: lhs.const - rhs)
+}
+
+public func * <T>(lhs: NSLayoutAnchor<T>, rhs: CGFloat) -> ConstraintMultiplierAttribute<T> {
+    return ConstraintMultiplierAttribute(anchor: lhs, multiplier: rhs)
+}
+
+public func * (lhs: UILayoutSupport, rhs: CGFloat) -> LayoutGuideMultiplierAttribute {
+    return LayoutGuideMultiplierAttribute(guide: lhs, multiplier: rhs)
+}
+
+public func * <T>(lhs: ConstraintMultiplierAttribute<T>, rhs: CGFloat) -> ConstraintMultiplierAttribute<T> {
+    return ConstraintMultiplierAttribute(anchor: lhs.anchor, multiplier: rhs)
+}
+
+// MARK: - Equatable operations
+
+@discardableResult
+public func ~ <T>(lhs: NSLayoutAnchor<T>, rhs: NSLayoutAnchor<T>) -> NSLayoutConstraint {
+    let constraint = lhs.constraint(equalTo: rhs).activate()
+    return constraint
+}
+
+@discardableResult
+public func ~ <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
+    let constraint = lhs.constraint(equalTo: rhs.anchor, constant: rhs.const).activate()
+    return constraint
+}
+
+@discardableResult
+public func ~ (lhs: NSLayoutXAxisAnchor, rhs: NSLayoutXAxisAnchor) -> NSLayoutConstraint {
+    let constraint = lhs.constraint(equalTo: rhs)
+    return constraint.activate()
+}
+
+@discardableResult
+public func ~ (lhs: NSLayoutYAxisAnchor, rhs: NSLayoutYAxisAnchor) -> NSLayoutConstraint {
+    let constraint = lhs.constraint(equalTo: rhs)
+    return constraint.activate()
+}
+
+@discardableResult
+public func ~ (lhs: NSLayoutYAxisAnchor, rhs: UILayoutSupport) -> NSLayoutConstraint {
+    let constraint = lhs.constraint(equalTo: rhs.bottomAnchor)
+    return constraint.activate()
+}
+
+@discardableResult
+public func ~ (lhs: NSLayoutYAxisAnchor, rhs: LayoutGuideAttribute) -> NSLayoutConstraint {
+    let constraint = lhs.constraint(equalTo: rhs.guide.bottomAnchor, constant: rhs.const)
+    return constraint.activate()
+}
+
+@discardableResult
+public func ~ (lhs: NSLayoutDimension, rhs: CGFloat) -> NSLayoutConstraint {
+    let constraint = lhs.constraint(equalToConstant: rhs)
+    return constraint.activate()
+}
+
+@discardableResult
+public func ~ (lhs: NSLayoutDimension, rhs: NSLayoutDimension) -> NSLayoutConstraint {
+    let constraint = lhs.constraint(equalTo: rhs)
+    return constraint.activate()
+}
+
+// MARK: - Less/Greather than operations
+
+@discardableResult
+public func <~ <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
+    let constraint = lhs.constraint(lessThanOrEqualTo: rhs.anchor, constant: rhs.const)
+    return constraint.activate()
+}
+
+@discardableResult
+public func <~ (lhs: NSLayoutDimension, rhs: CGFloat) -> NSLayoutConstraint {
+    let constraint = lhs.constraint(lessThanOrEqualToConstant: rhs)
+    return constraint.activate()
+}
+
+@discardableResult
+public func ~> <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
+    let constraint = lhs.constraint(greaterThanOrEqualTo: rhs.anchor, constant: rhs.const)
+    return constraint.activate()
+}
+
+@discardableResult
+public func ~> (lhs: NSLayoutDimension, rhs: CGFloat) -> NSLayoutConstraint {
+    let constraint = lhs.constraint(greaterThanOrEqualToConstant: rhs)
+    return constraint.activate()
 }
 
 precedencegroup AutoLayoutSugarPrecedence {
@@ -33,108 +147,6 @@ precedencegroup AutoLayoutSugarPrecedence {
     lowerThan: AdditionPrecedence
 }
 
-infix operator ~=: AutoLayoutSugarPrecedence
-infix operator <=: AutoLayoutSugarPrecedence
-infix operator >=: AutoLayoutSugarPrecedence
-
-// MARK: - Modifications
-
-func + <T>(lhs: NSLayoutAnchor<T>, rhs: CGFloat) -> ConstraintAttribute<T> {
-    return ConstraintAttribute(anchor: lhs, const: rhs)
-}
-
-func + (lhs: UILayoutSupport, rhs: CGFloat) -> LayoutGuideAttribute {
-    return LayoutGuideAttribute(guide: lhs, const: rhs)
-}
-
-func + <T>(lhs: ConstraintAttribute<T>, rhs: CGFloat) -> ConstraintAttribute<T> {
-    return ConstraintAttribute(anchor: lhs.anchor, const: lhs.const + rhs)
-}
-
-func - <T>(lhs: NSLayoutAnchor<T>, rhs: CGFloat) -> ConstraintAttribute<T> {
-    return ConstraintAttribute(anchor: lhs, const: -rhs)
-}
-
-func - (lhs: UILayoutSupport, rhs: CGFloat) -> LayoutGuideAttribute {
-    return LayoutGuideAttribute(guide: lhs, const: -rhs)
-}
-
-func - <T>(lhs: ConstraintAttribute<T>, rhs: CGFloat) -> ConstraintAttribute<T> {
-    return ConstraintAttribute(anchor: lhs.anchor, const: lhs.const - rhs)
-}
-
-func * <T>(lhs: NSLayoutAnchor<T>, rhs: CGFloat) -> ConstraintMultiplierAttribute<T> {
-    return ConstraintMultiplierAttribute(anchor: lhs, multiplier: rhs)
-}
-
-func * (lhs: UILayoutSupport, rhs: CGFloat) -> LayoutGuideMultiplierAttribute {
-    return LayoutGuideMultiplierAttribute(guide: lhs, multiplier: rhs)
-}
-
-func * <T>(lhs: ConstraintMultiplierAttribute<T>, rhs: CGFloat) -> ConstraintMultiplierAttribute<T> {
-    return ConstraintMultiplierAttribute(anchor: lhs.anchor, multiplier: rhs)
-}
-
-// MARK: - Equatable operations
-
-@discardableResult
-func ~= <T>(lhs: NSLayoutAnchor<T>, rhs: NSLayoutAnchor<T>) -> NSLayoutConstraint {
-    return lhs.constraint(equalTo: rhs).activate()
-}
-
-@discardableResult
-func ~= <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
-    return lhs.constraint(equalTo: rhs.anchor, constant: rhs.const).activate()
-}
-
-@discardableResult
-func ~= (lhs: NSLayoutXAxisAnchor, rhs: NSLayoutXAxisAnchor) -> NSLayoutConstraint {
-    return lhs.constraint(equalTo: rhs).activate()
-}
-
-@discardableResult
-func ~= (lhs: NSLayoutYAxisAnchor, rhs: NSLayoutYAxisAnchor) -> NSLayoutConstraint {
-    return lhs.constraint(equalTo: rhs).activate()
-}
-
-@discardableResult
-func ~= (lhs: NSLayoutYAxisAnchor, rhs: UILayoutSupport) -> NSLayoutConstraint {
-    return lhs.constraint(equalTo: rhs.bottomAnchor).activate()
-}
-
-@discardableResult
-func ~= (lhs: NSLayoutYAxisAnchor, rhs: LayoutGuideAttribute) -> NSLayoutConstraint {
-    return lhs.constraint(equalTo: rhs.guide.bottomAnchor, constant: rhs.const).activate()
-}
-
-@discardableResult
-func ~= (lhs: NSLayoutDimension, rhs: CGFloat) -> NSLayoutConstraint {
-    return lhs.constraint(equalToConstant: rhs).activate()
-}
-
-@discardableResult
-func ~= (lhs: NSLayoutDimension, rhs: NSLayoutDimension) -> NSLayoutConstraint {
-    return lhs.constraint(equalTo: rhs).activate()
-}
-
-// MARK: - Less/Greather than operations
-
-@discardableResult
-func <= <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
-    return lhs.constraint(lessThanOrEqualTo: rhs.anchor, constant: rhs.const).activate()
-}
-
-@discardableResult
-func <= (lhs: NSLayoutDimension, rhs: CGFloat) -> NSLayoutConstraint {
-    return lhs.constraint(lessThanOrEqualToConstant: rhs).activate()
-}
-
-@discardableResult
-func >= <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
-    return lhs.constraint(greaterThanOrEqualTo: rhs.anchor, constant: rhs.const).activate()
-}
-
-@discardableResult
-func >= (lhs: NSLayoutDimension, rhs: CGFloat) -> NSLayoutConstraint {
-    return lhs.constraint(greaterThanOrEqualToConstant: rhs).activate()
-}
+infix operator ~: AutoLayoutSugarPrecedence
+infix operator <~: AutoLayoutSugarPrecedence
+infix operator ~>: AutoLayoutSugarPrecedence
