@@ -17,6 +17,7 @@ public extension UIView {
     ///   none
     ///
     /// - Returns: Current view.
+    @discardableResult
     func prepareForAutoLayout() -> Self {
         translatesAutoresizingMaskIntoConstraints = false
         return self
