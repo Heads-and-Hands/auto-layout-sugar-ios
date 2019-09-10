@@ -69,49 +69,49 @@ public func * <T>(lhs: ConstraintMultiplierAttribute<T>, rhs: CGFloat) -> Constr
 // MARK: - Equatable operations
 
 @discardableResult
-public func =~ <T>(lhs: NSLayoutAnchor<T>, rhs: NSLayoutAnchor<T>) -> NSLayoutConstraint {
+public func ~ <T>(lhs: NSLayoutAnchor<T>, rhs: NSLayoutAnchor<T>) -> NSLayoutConstraint {
     let constraint = lhs.constraint(equalTo: rhs).activate()
     return constraint
 }
 
 @discardableResult
-public func =~ <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
+public func ~ <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
     let constraint = lhs.constraint(equalTo: rhs.anchor, constant: rhs.const).activate()
     return constraint
 }
 
 @discardableResult
-public func =~ (lhs: NSLayoutXAxisAnchor, rhs: NSLayoutXAxisAnchor) -> NSLayoutConstraint {
+public func ~ (lhs: NSLayoutXAxisAnchor, rhs: NSLayoutXAxisAnchor) -> NSLayoutConstraint {
     let constraint = lhs.constraint(equalTo: rhs)
     return constraint.activate()
 }
 
 @discardableResult
-public func =~ (lhs: NSLayoutYAxisAnchor, rhs: NSLayoutYAxisAnchor) -> NSLayoutConstraint {
+public func ~ (lhs: NSLayoutYAxisAnchor, rhs: NSLayoutYAxisAnchor) -> NSLayoutConstraint {
     let constraint = lhs.constraint(equalTo: rhs)
     return constraint.activate()
 }
 
 @discardableResult
-public func =~ (lhs: NSLayoutYAxisAnchor, rhs: UILayoutSupport) -> NSLayoutConstraint {
+public func ~ (lhs: NSLayoutYAxisAnchor, rhs: UILayoutSupport) -> NSLayoutConstraint {
     let constraint = lhs.constraint(equalTo: rhs.bottomAnchor)
     return constraint.activate()
 }
 
 @discardableResult
-public func =~ (lhs: NSLayoutYAxisAnchor, rhs: LayoutGuideAttribute) -> NSLayoutConstraint {
+public func ~ (lhs: NSLayoutYAxisAnchor, rhs: LayoutGuideAttribute) -> NSLayoutConstraint {
     let constraint = lhs.constraint(equalTo: rhs.guide.bottomAnchor, constant: rhs.const)
     return constraint.activate()
 }
 
 @discardableResult
-public func =~ (lhs: NSLayoutDimension, rhs: CGFloat) -> NSLayoutConstraint {
+public func ~ (lhs: NSLayoutDimension, rhs: CGFloat) -> NSLayoutConstraint {
     let constraint = lhs.constraint(equalToConstant: rhs)
     return constraint.activate()
 }
 
 @discardableResult
-public func =~ (lhs: NSLayoutDimension, rhs: NSLayoutDimension) -> NSLayoutConstraint {
+public func ~ (lhs: NSLayoutDimension, rhs: NSLayoutDimension) -> NSLayoutConstraint {
     let constraint = lhs.constraint(equalTo: rhs)
     return constraint.activate()
 }
@@ -119,34 +119,35 @@ public func =~ (lhs: NSLayoutDimension, rhs: NSLayoutDimension) -> NSLayoutConst
 // MARK: - Less/Greather than operations
 
 @discardableResult
-public func <= <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
+public func <~ <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
     let constraint = lhs.constraint(lessThanOrEqualTo: rhs.anchor, constant: rhs.const)
     return constraint.activate()
 }
 
 @discardableResult
-public func <= (lhs: NSLayoutDimension, rhs: CGFloat) -> NSLayoutConstraint {
+public func <~ (lhs: NSLayoutDimension, rhs: CGFloat) -> NSLayoutConstraint {
     let constraint = lhs.constraint(lessThanOrEqualToConstant: rhs)
     return constraint.activate()
 }
 
 @discardableResult
-public func >= <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
+public func >~ <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
     let constraint = lhs.constraint(greaterThanOrEqualTo: rhs.anchor, constant: rhs.const)
     return constraint.activate()
 }
 
 @discardableResult
-public func >= (lhs: NSLayoutDimension, rhs: CGFloat) -> NSLayoutConstraint {
+public func >~ (lhs: NSLayoutDimension, rhs: CGFloat) -> NSLayoutConstraint {
     let constraint = lhs.constraint(greaterThanOrEqualToConstant: rhs)
     return constraint.activate()
 }
 
 precedencegroup AutoLayoutSugarPrecedence {
+    associativity: left
     higherThan: ComparisonPrecedence
     lowerThan: AdditionPrecedence
 }
 
-infix operator =~: AutoLayoutSugarPrecedence
-infix operator <=: AutoLayoutSugarPrecedence
-infix operator >=: AutoLayoutSugarPrecedence
+infix operator ~ : AutoLayoutSugarPrecedence
+infix operator <~ : AutoLayoutSugarPrecedence
+infix operator >~ : AutoLayoutSugarPrecedence

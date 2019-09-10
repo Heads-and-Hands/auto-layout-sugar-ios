@@ -21,7 +21,7 @@ public extension UIView {
     @discardableResult
     func centerY(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeCenterYAnchor =~ relatedView.safeCenterYAnchor + inset
+        safeCenterYAnchor ~ relatedView.safeCenterYAnchor + inset
         return self
     }
 
@@ -35,7 +35,7 @@ public extension UIView {
     @discardableResult
     func centerX(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeCenterXAnchor =~ relatedView.safeCenterXAnchor + inset
+        safeCenterXAnchor ~ relatedView.safeCenterXAnchor + inset
         return self
     }
 
@@ -50,8 +50,8 @@ public extension UIView {
     @discardableResult
     func center(x xInset: CGFloat = 0.0, y yInset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeCenterYAnchor =~ relatedView.safeCenterYAnchor + yInset
-        safeCenterXAnchor =~ relatedView.safeCenterXAnchor + xInset
+        safeCenterYAnchor ~ relatedView.safeCenterYAnchor + yInset
+        safeCenterXAnchor ~ relatedView.safeCenterXAnchor + xInset
         return self
     }
 
@@ -65,7 +65,7 @@ public extension UIView {
     @discardableResult
     func left(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeLeadingAnchor =~ relatedView.safeLeadingAnchor + inset
+        safeLeadingAnchor ~ relatedView.safeLeadingAnchor + inset
         return self
     }
 
@@ -84,9 +84,9 @@ public extension UIView {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
         switch relation {
         case .greaterThanOrEqual:
-            safeLeadingAnchor >= relatedView.safeLeadingAnchor + (flexibleMargin.points ?? 0)
+            safeLeadingAnchor >~ relatedView.safeLeadingAnchor + (flexibleMargin.points ?? 0)
         case .lessThanOrEqual:
-            safeLeadingAnchor <= relatedView.safeLeadingAnchor + (flexibleMargin.points ?? 0)
+            safeLeadingAnchor <~ relatedView.safeLeadingAnchor + (flexibleMargin.points ?? 0)
         default:
             break
         }
@@ -104,7 +104,7 @@ public extension UIView {
     @discardableResult
     func left(to side: LayoutPinnedSide, of relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeLeadingAnchor =~ relatedView.anchorX(for: side) + side.offset
+        safeLeadingAnchor ~ relatedView.anchorX(for: side) + side.offset
         return self
     }
 
@@ -118,7 +118,7 @@ public extension UIView {
     @discardableResult
     func left(to side: LayoutSideDirection, of relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeLeadingAnchor =~ relatedView.anchorX(for: side)
+        safeLeadingAnchor ~ relatedView.anchorX(for: side)
         return self
     }
 
@@ -132,7 +132,7 @@ public extension UIView {
     @discardableResult
     func right(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTrailingAnchor =~ relatedView.safeTrailingAnchor - inset
+        safeTrailingAnchor ~ relatedView.safeTrailingAnchor - inset
         return self
     }
 
@@ -151,9 +151,9 @@ public extension UIView {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
         switch relation {
         case .greaterThanOrEqual:
-            safeTrailingAnchor >= relatedView.safeTrailingAnchor + (flexibleMargin.points ?? 0)
+            safeTrailingAnchor >~ relatedView.safeTrailingAnchor + (flexibleMargin.points ?? 0)
         case .lessThanOrEqual:
-            safeTrailingAnchor <= relatedView.safeTrailingAnchor + (flexibleMargin.points ?? 0)
+            safeTrailingAnchor <~ relatedView.safeTrailingAnchor + (flexibleMargin.points ?? 0)
         default:
             break
         }
@@ -171,7 +171,7 @@ public extension UIView {
     @discardableResult
     func right(to side: LayoutPinnedSide, of relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTrailingAnchor =~ relatedView.anchorX(for: side) - side.offset
+        safeTrailingAnchor ~ relatedView.anchorX(for: side) - side.offset
         return self
     }
 
@@ -185,7 +185,7 @@ public extension UIView {
     @discardableResult
     func right(to side: LayoutSideDirection, of relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTrailingAnchor =~ relatedView.anchorX(for: side) - side.offset
+        safeTrailingAnchor ~ relatedView.anchorX(for: side)
         return self
     }
 
@@ -199,7 +199,7 @@ public extension UIView {
     @discardableResult
     func top(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTopAnchor =~ relatedView.safeTopAnchor + inset
+        safeTopAnchor ~ relatedView.safeTopAnchor + inset
         return self
     }
 
@@ -218,9 +218,9 @@ public extension UIView {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
         switch relation {
         case .greaterThanOrEqual:
-            safeTopAnchor >= relatedView.safeTopAnchor + (flexibleMargin.points ?? 0)
+            safeTopAnchor >~ relatedView.safeTopAnchor + (flexibleMargin.points ?? 0)
         case .lessThanOrEqual:
-            safeTopAnchor <= relatedView.safeTopAnchor + (flexibleMargin.points ?? 0)
+            safeTopAnchor <~ relatedView.safeTopAnchor + (flexibleMargin.points ?? 0)
         default:
             break
         }
@@ -238,7 +238,7 @@ public extension UIView {
     @discardableResult
     func top(to side: LayoutPinnedSide, of relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTopAnchor =~ relatedView.anchorY(for: side) + side.offset
+        safeTopAnchor ~ relatedView.anchorY(for: side) + side.offset
         return self
     }
 
@@ -252,7 +252,7 @@ public extension UIView {
     @discardableResult
     func top(to side: LayoutSideDirection, of relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTopAnchor =~ relatedView.anchorY(for: side)
+        safeTopAnchor ~ relatedView.anchorY(for: side)
         return self
     }
 
@@ -266,7 +266,7 @@ public extension UIView {
     @discardableResult
     func bottom(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeBottomAnchor =~ relatedView.safeBottomAnchor - inset
+        safeBottomAnchor ~ relatedView.safeBottomAnchor - inset
         return self
     }
 
@@ -285,9 +285,9 @@ public extension UIView {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
         switch relation {
         case .greaterThanOrEqual:
-            safeBottomAnchor >= relatedView.safeBottomAnchor + (flexibleMargin.points ?? 0)
+            safeBottomAnchor >~ relatedView.safeBottomAnchor + (flexibleMargin.points ?? 0)
         case .lessThanOrEqual:
-            safeBottomAnchor <= relatedView.safeBottomAnchor + (flexibleMargin.points ?? 0)
+            safeBottomAnchor <~ relatedView.safeBottomAnchor + (flexibleMargin.points ?? 0)
         default:
             break
         }
@@ -305,7 +305,7 @@ public extension UIView {
     @discardableResult
     func bottom(to side: LayoutPinnedSide, of relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeBottomAnchor =~ relatedView.anchorY(for: side) - side.offset
+        safeBottomAnchor ~ relatedView.anchorY(for: side) - side.offset
         return self
     }
 }

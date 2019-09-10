@@ -19,7 +19,7 @@ public extension UIView {
     /// - Returns: Current view.
     @discardableResult
     func height(_ value: CGFloat = 0.0) -> Self {
-        heightAnchor =~ value
+        heightAnchor ~ value
         return self
     }
 
@@ -31,7 +31,32 @@ public extension UIView {
     /// - Returns: Current view.
     @discardableResult
     func height(as relatedView: UIView) -> Self {
-        heightAnchor =~ relatedView.heightAnchor
+        heightAnchor ~ relatedView.heightAnchor
+        return self
+    }
+
+    /// Install current view height anchor to height anchor of related view with inset.
+    ///
+    /// - Parameters:
+    ///   - flexibleMargin: Less/greater than related view left side with points offset (like .bottom(<=90))
+    ///   - relatedView:    Related view that constraints used as base, `nil` by default (if `nil` then use current view's superview as related view).
+    ///
+    /// - Returns: Current view.
+    @discardableResult
+    func height(_ flexibleMargin: FlexibleMargin, as relatedView: UIView? = nil) -> Self {
+        guard let relation = flexibleMargin.relation else {
+            return self
+        }
+        let relatedView = self.getRelatedViewOrParent(with: relatedView)
+        switch relation {
+        case .greaterThanOrEqual:
+            heightAnchor >~ relatedView.heightAnchor + (flexibleMargin.points ?? 0)
+        case .lessThanOrEqual:
+            heightAnchor <~ relatedView.heightAnchor + (flexibleMargin.points ?? 0)
+        default:
+            break
+        }
+
         return self
     }
 
@@ -43,7 +68,7 @@ public extension UIView {
     /// - Returns: Current view.
     @discardableResult
     func width(_ value: CGFloat = 0.0) -> Self {
-        widthAnchor =~ value
+        widthAnchor ~ value
         return self
     }
 
@@ -55,7 +80,32 @@ public extension UIView {
     /// - Returns: Current view.
     @discardableResult
     func width(as relatedView: UIView) -> Self {
-        widthAnchor =~ relatedView.widthAnchor
+        widthAnchor ~ relatedView.widthAnchor
+        return self
+    }
+
+    /// Install current view width anchor to width anchor of related view with inset.
+    ///
+    /// - Parameters:
+    ///   - flexibleMargin: Less/greater than related view left side with points offset (like .bottom(<=90))
+    ///   - relatedView:    Related view that constraints used as base, `nil` by default (if `nil` then use current view's superview as related view).
+    ///
+    /// - Returns: Current view.
+    @discardableResult
+    func width(_ flexibleMargin: FlexibleMargin, as relatedView: UIView? = nil) -> Self {
+        guard let relation = flexibleMargin.relation else {
+            return self
+        }
+        let relatedView = self.getRelatedViewOrParent(with: relatedView)
+        switch relation {
+        case .greaterThanOrEqual:
+            widthAnchor >~ relatedView.widthAnchor + (flexibleMargin.points ?? 0)
+        case .lessThanOrEqual:
+            widthAnchor <~ relatedView.widthAnchor + (flexibleMargin.points ?? 0)
+        default:
+            break
+        }
+
         return self
     }
 

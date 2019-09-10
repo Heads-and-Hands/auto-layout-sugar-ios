@@ -10,14 +10,14 @@ public struct FlexibleMargin {
     var relation: NSLayoutConstraint.Relation!
 }
 
-prefix operator >=
+prefix operator >>=
 @discardableResult
-public prefix func >= (points: CGFloat) -> FlexibleMargin {
+public prefix func >>= (points: CGFloat) -> FlexibleMargin {
     return FlexibleMargin(points: points, relation: .greaterThanOrEqual)
 }
 
-prefix operator <=
+prefix operator <<=
 @discardableResult
-public prefix func <= (points: CGFloat) -> FlexibleMargin {
+public prefix func <<= (points: CGFloat) -> FlexibleMargin {
     return FlexibleMargin(points: points, relation: .lessThanOrEqual)
 }
