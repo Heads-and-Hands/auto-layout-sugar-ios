@@ -8,9 +8,11 @@
 
 import Foundation
 
-private enum CommonSideRawValues {
+internal enum CommonSideRawValues {
     static let top: String = "top"
     static let left: String = "left"
+    static let hCenter: String = "hCenter"
+    static let vCenter: String = "vCenter"
     static let right: String = "right"
     static let bottom: String = "bottom"
 }
@@ -25,12 +27,14 @@ public enum LayoutPinnedSide: Hashable, RawRepresentable, LayoutSideProtocol {
 
     case top(_: CGFloat)
     case left(_: CGFloat)
+    case hCenter(_: CGFloat)
+    case vCenter(_: CGFloat)
     case right(_: CGFloat)
     case bottom(_: CGFloat)
 
     var offset: CGFloat {
         switch self {
-        case .top(let value), .left(let value), .right(let value), .bottom(let value):
+        case .top(let value), .left(let value), .hCenter(let value), .vCenter(let value), .right(let value), .bottom(let value):
             return value
         }
     }
@@ -41,6 +45,10 @@ public enum LayoutPinnedSide: Hashable, RawRepresentable, LayoutSideProtocol {
             return CommonSideRawValues.top
         case .left:
             return CommonSideRawValues.left
+        case .hCenter:
+            return CommonSideRawValues.hCenter
+        case .vCenter:
+            return CommonSideRawValues.vCenter
         case .right:
             return CommonSideRawValues.right
         case .bottom:
@@ -59,6 +67,8 @@ public enum LayoutSideDirection: Hashable, RawRepresentable, LayoutSideProtocol 
 
     case top
     case left
+    case hCenter
+    case vCenter
     case right
     case bottom
 
@@ -68,6 +78,10 @@ public enum LayoutSideDirection: Hashable, RawRepresentable, LayoutSideProtocol 
             return CommonSideRawValues.top
         case .left:
             return CommonSideRawValues.left
+        case .hCenter:
+            return CommonSideRawValues.hCenter
+        case .vCenter:
+            return CommonSideRawValues.vCenter
         case .right:
             return CommonSideRawValues.right
         case .bottom:

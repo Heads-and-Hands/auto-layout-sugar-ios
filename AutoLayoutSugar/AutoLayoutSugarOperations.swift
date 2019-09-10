@@ -9,23 +9,23 @@
 import UIKit
 
 public struct ConstraintMultiplierAttribute<T: AnyObject> {
-    let anchor: NSLayoutAnchor<T>
-    let multiplier: CGFloat
+    public let anchor: NSLayoutAnchor<T>
+    public let multiplier: CGFloat
 }
 
 public struct LayoutGuideMultiplierAttribute {
-    let guide: UILayoutSupport
-    let multiplier: CGFloat
+    public let guide: UILayoutSupport
+    public let multiplier: CGFloat
 }
 
 public struct ConstraintAttribute<T: AnyObject> {
-    let anchor: NSLayoutAnchor<T>
-    let const: CGFloat
+    public let anchor: NSLayoutAnchor<T>
+    public let const: CGFloat
 }
 
 public struct LayoutGuideAttribute {
-    let guide: UILayoutSupport
-    let const: CGFloat
+    public let guide: UILayoutSupport
+    public let const: CGFloat
 }
 
 // MARK: - Modifications

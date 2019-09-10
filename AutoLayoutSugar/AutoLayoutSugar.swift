@@ -60,6 +60,8 @@ public extension UIView {
             pin([.top(insets.top), .left(insets.left), .bottom(insets.bottom)], to: relatedView)
         case .bottom:
             pin([.top(insets.top), .left(insets.left), .right(insets.right)], to: relatedView)
+        default:
+            break
         }
         return self
     }
@@ -135,13 +137,17 @@ public extension UIView {
         }
 
         switch side.rawValue {
-        case "top":
+        case CommonSideRawValues.top:
             safeTopAnchor ~ relatedView.safeTopAnchor + offset
-        case "left":
+        case CommonSideRawValues.left:
             safeLeadingAnchor ~ relatedView.safeLeadingAnchor + offset
-        case "right":
+        case CommonSideRawValues.hCenter:
+            safeCenterXAnchor ~ relatedView.safeCenterXAnchor + offset
+        case CommonSideRawValues.vCenter:
+            safeCenterYAnchor ~ relatedView.safeCenterYAnchor + offset
+        case CommonSideRawValues.right:
             safeTrailingAnchor ~ relatedView.safeTrailingAnchor - offset
-        case "bottom":
+        case CommonSideRawValues.bottom:
             safeBottomAnchor ~ relatedView.safeBottomAnchor - offset
         default:
             break
@@ -168,6 +174,8 @@ internal extension UIView {
         switch side {
         case .right:
             return safeTrailingAnchor
+        case .hCenter:
+            return safeCenterXAnchor
         case .left:
             return safeLeadingAnchor
         default:
@@ -179,6 +187,8 @@ internal extension UIView {
         switch side {
         case .right:
             return safeTrailingAnchor
+        case .hCenter:
+            return safeCenterXAnchor
         case .left:
             return safeLeadingAnchor
         default:
@@ -190,6 +200,8 @@ internal extension UIView {
         switch side {
         case .top:
             return safeTopAnchor
+        case .vCenter:
+            return safeCenterYAnchor
         case .bottom:
             return safeBottomAnchor
         default:
@@ -200,6 +212,8 @@ internal extension UIView {
         switch side {
         case .top:
             return safeTopAnchor
+        case .vCenter:
+            return safeCenterYAnchor
         case .bottom:
             return safeBottomAnchor
         default:

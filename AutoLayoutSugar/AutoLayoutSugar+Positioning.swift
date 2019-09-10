@@ -50,8 +50,8 @@ public extension UIView {
     @discardableResult
     func center(x xInset: CGFloat = 0.0, y yInset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeCenterYAnchor ~ relatedView.safeCenterYAnchor + yInset
         safeCenterXAnchor ~ relatedView.safeCenterXAnchor + xInset
+        safeCenterYAnchor ~ relatedView.safeCenterYAnchor + yInset
         return self
     }
 
