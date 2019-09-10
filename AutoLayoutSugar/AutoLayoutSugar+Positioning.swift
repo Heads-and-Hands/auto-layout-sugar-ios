@@ -21,7 +21,7 @@ public extension UIView {
     @discardableResult
     func centerY(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeCenterYAnchor ~ relatedView.safeCenterYAnchor + inset
+        safeCenterYAnchor =~ relatedView.safeCenterYAnchor + inset
         return self
     }
 
@@ -35,7 +35,7 @@ public extension UIView {
     @discardableResult
     func centerX(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeCenterXAnchor ~ relatedView.safeCenterXAnchor + inset
+        safeCenterXAnchor =~ relatedView.safeCenterXAnchor + inset
         return self
     }
 
@@ -50,8 +50,8 @@ public extension UIView {
     @discardableResult
     func center(x xInset: CGFloat = 0.0, y yInset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeCenterYAnchor ~ relatedView.safeCenterYAnchor + xInset
-        safeCenterXAnchor ~ relatedView.safeCenterXAnchor + yInset
+        safeCenterYAnchor =~ relatedView.safeCenterYAnchor + yInset
+        safeCenterXAnchor =~ relatedView.safeCenterXAnchor + xInset
         return self
     }
 
@@ -65,7 +65,32 @@ public extension UIView {
     @discardableResult
     func left(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeLeadingAnchor ~ relatedView.safeLeadingAnchor + inset
+        safeLeadingAnchor =~ relatedView.safeLeadingAnchor + inset
+        return self
+    }
+
+    /// Install current view leading anchor to leading anchor of related view with inset.
+    ///
+    /// - Parameters:
+    ///   - flexibleMargin: Less/greater than related view left side with points offset (like .left(<=90))
+    ///   - relatedView:    Related view that constraints used as base, `nil` by default (if `nil` then use current view's superview as related view).
+    ///
+    /// - Returns: Current view.
+    @discardableResult
+    func left(_ flexibleMargin: FlexibleMargin, to relatedView: UIView? = nil) -> Self {
+        guard let relation = flexibleMargin.relation else {
+            return self
+        }
+        let relatedView = self.getRelatedViewOrParent(with: relatedView)
+        switch relation {
+        case .greaterThanOrEqual:
+            safeLeadingAnchor >= relatedView.safeLeadingAnchor + (flexibleMargin.points ?? 0)
+        case .lessThanOrEqual:
+            safeLeadingAnchor <= relatedView.safeLeadingAnchor + (flexibleMargin.points ?? 0)
+        default:
+            break
+        }
+
         return self
     }
 
@@ -79,7 +104,21 @@ public extension UIView {
     @discardableResult
     func left(to side: LayoutPinnedSide, of relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeLeadingAnchor ~ relatedView.anchorX(for: side) + side.offset
+        safeLeadingAnchor =~ relatedView.anchorX(for: side) + side.offset
+        return self
+    }
+
+    /// Install current view leading anchor to current side's xAnchor of related view.
+    ///
+    /// - Parameters:
+    ///   - side:           Concrete side of related view that controls current view leading anchor.
+    ///   - relatedView:    Related view that constraints used as base, `nil` by default (if `nil` then use current view's superview as related view).
+    ///
+    /// - Returns: Current view.
+    @discardableResult
+    func left(to side: LayoutSideDirection, of relatedView: UIView? = nil) -> Self {
+        let relatedView = self.getRelatedViewOrParent(with: relatedView)
+        safeLeadingAnchor =~ relatedView.anchorX(for: side)
         return self
     }
 
@@ -93,7 +132,32 @@ public extension UIView {
     @discardableResult
     func right(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTrailingAnchor ~ relatedView.safeTrailingAnchor - inset
+        safeTrailingAnchor =~ relatedView.safeTrailingAnchor - inset
+        return self
+    }
+
+    /// Install current view trailing anchor to trailing anchor of related view with inset.
+    ///
+    /// - Parameters:
+    ///   - flexibleMargin: Less/greater than related view left side with points offset (like .right(<=90))
+    ///   - relatedView:    Related view that constraints used as base, `nil` by default (if `nil` then use current view's superview as related view).
+    ///
+    /// - Returns: Current view.
+    @discardableResult
+    func right(_ flexibleMargin: FlexibleMargin, to relatedView: UIView? = nil) -> Self {
+        guard let relation = flexibleMargin.relation else {
+            return self
+        }
+        let relatedView = self.getRelatedViewOrParent(with: relatedView)
+        switch relation {
+        case .greaterThanOrEqual:
+            safeTrailingAnchor >= relatedView.safeTrailingAnchor + (flexibleMargin.points ?? 0)
+        case .lessThanOrEqual:
+            safeTrailingAnchor <= relatedView.safeTrailingAnchor + (flexibleMargin.points ?? 0)
+        default:
+            break
+        }
+
         return self
     }
 
@@ -107,7 +171,21 @@ public extension UIView {
     @discardableResult
     func right(to side: LayoutPinnedSide, of relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTrailingAnchor ~ relatedView.anchorX(for: side) - side.offset
+        safeTrailingAnchor =~ relatedView.anchorX(for: side) - side.offset
+        return self
+    }
+
+    /// Install current view trailing anchor to current side's xAnchor of related view.
+    ///
+    /// - Parameters:
+    ///   - side:           Concrete side of related view that controls current view trailing anchor.
+    ///   - relatedView:    Related view that constraints used as base, `nil` by default (if `nil` then use current view's superview as related view).
+    ///
+    /// - Returns: Current view.
+    @discardableResult
+    func right(to side: LayoutSideDirection, of relatedView: UIView? = nil) -> Self {
+        let relatedView = self.getRelatedViewOrParent(with: relatedView)
+        safeTrailingAnchor =~ relatedView.anchorX(for: side) - side.offset
         return self
     }
 
@@ -121,7 +199,32 @@ public extension UIView {
     @discardableResult
     func top(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTopAnchor ~ relatedView.safeTopAnchor + inset
+        safeTopAnchor =~ relatedView.safeTopAnchor + inset
+        return self
+    }
+
+    /// Install current view top anchor to top anchor of related view with inset.
+    ///
+    /// - Parameters:
+    ///   - flexibleMargin: Less/greater than related view left side with points offset (like .top(<=90))
+    ///   - relatedView:    Related view that constraints used as base, `nil` by default (if `nil` then use current view's superview as related view).
+    ///
+    /// - Returns: Current view.
+    @discardableResult
+    func top(_ flexibleMargin: FlexibleMargin, to relatedView: UIView? = nil) -> Self {
+        guard let relation = flexibleMargin.relation else {
+            return self
+        }
+        let relatedView = self.getRelatedViewOrParent(with: relatedView)
+        switch relation {
+        case .greaterThanOrEqual:
+            safeTopAnchor >= relatedView.safeTopAnchor + (flexibleMargin.points ?? 0)
+        case .lessThanOrEqual:
+            safeTopAnchor <= relatedView.safeTopAnchor + (flexibleMargin.points ?? 0)
+        default:
+            break
+        }
+
         return self
     }
 
@@ -135,7 +238,21 @@ public extension UIView {
     @discardableResult
     func top(to side: LayoutPinnedSide, of relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTopAnchor ~ relatedView.anchorY(for: side) + side.offset
+        safeTopAnchor =~ relatedView.anchorY(for: side) + side.offset
+        return self
+    }
+
+    /// Install current view top anchor to current side's yAnchor of related view.
+    ///
+    /// - Parameters:
+    ///   - side:           Concrete side of related view that controls current view top anchor.
+    ///   - relatedView:    Related view that constraints used as base, `nil` by default (if `nil` then use current view's superview as related view).
+    ///
+    /// - Returns: Current view.
+    @discardableResult
+    func top(to side: LayoutSideDirection, of relatedView: UIView? = nil) -> Self {
+        let relatedView = self.getRelatedViewOrParent(with: relatedView)
+        safeTopAnchor =~ relatedView.anchorY(for: side)
         return self
     }
 
@@ -149,7 +266,32 @@ public extension UIView {
     @discardableResult
     func bottom(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeBottomAnchor ~ relatedView.safeBottomAnchor - inset
+        safeBottomAnchor =~ relatedView.safeBottomAnchor - inset
+        return self
+    }
+
+    /// Install current view bottom anchor to bottom anchor of related view with inset.
+    ///
+    /// - Parameters:
+    ///   - flexibleMargin: Less/greater than related view left side with points offset (like .bottom(<=90))
+    ///   - relatedView:    Related view that constraints used as base, `nil` by default (if `nil` then use current view's superview as related view).
+    ///
+    /// - Returns: Current view.
+    @discardableResult
+    func bottom(_ flexibleMargin: FlexibleMargin, to relatedView: UIView? = nil) -> Self {
+        guard let relation = flexibleMargin.relation else {
+            return self
+        }
+        let relatedView = self.getRelatedViewOrParent(with: relatedView)
+        switch relation {
+        case .greaterThanOrEqual:
+            safeBottomAnchor >= relatedView.safeBottomAnchor + (flexibleMargin.points ?? 0)
+        case .lessThanOrEqual:
+            safeBottomAnchor <= relatedView.safeBottomAnchor + (flexibleMargin.points ?? 0)
+        default:
+            break
+        }
+
         return self
     }
 
@@ -163,7 +305,7 @@ public extension UIView {
     @discardableResult
     func bottom(to side: LayoutPinnedSide, of relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeBottomAnchor ~ relatedView.anchorY(for: side) - side.offset
+        safeBottomAnchor =~ relatedView.anchorY(for: side) - side.offset
         return self
     }
 }

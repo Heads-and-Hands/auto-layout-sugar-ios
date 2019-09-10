@@ -136,13 +136,13 @@ public extension UIView {
 
         switch side.rawValue {
         case "top":
-            safeTopAnchor ~ relatedView.safeTopAnchor + offset
+            safeTopAnchor =~ relatedView.safeTopAnchor + offset
         case "left":
-            safeLeadingAnchor ~ relatedView.safeLeadingAnchor + offset
+            safeLeadingAnchor =~ relatedView.safeLeadingAnchor + offset
         case "right":
-            safeTrailingAnchor ~ relatedView.safeTrailingAnchor - offset
+            safeTrailingAnchor =~ relatedView.safeTrailingAnchor - offset
         case "bottom":
-            safeBottomAnchor ~ relatedView.safeBottomAnchor - offset
+            safeBottomAnchor =~ relatedView.safeBottomAnchor - offset
         default:
             break
         }
@@ -175,7 +175,28 @@ internal extension UIView {
         }
     }
 
+    func anchorX(for side: LayoutSideDirection) -> NSLayoutXAxisAnchor {
+        switch side {
+        case .right:
+            return safeTrailingAnchor
+        case .left:
+            return safeLeadingAnchor
+        default:
+            fatalError("Something went wrong")
+        }
+    }
+
     func anchorY(for side: LayoutPinnedSide) -> NSLayoutYAxisAnchor {
+        switch side {
+        case .top:
+            return safeTopAnchor
+        case .bottom:
+            return safeBottomAnchor
+        default:
+            fatalError("Something went wrong")
+        }
+    }
+    func anchorY(for side: LayoutSideDirection) -> NSLayoutYAxisAnchor {
         switch side {
         case .top:
             return safeTopAnchor

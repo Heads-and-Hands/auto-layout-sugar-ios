@@ -30,8 +30,8 @@ let viewTopConstraint = view.topAnchor.constraint(equalTo: superview.topAnchor, 
 ```
 after:
 ```
-let viewBottomConstraint = view.bottomAnchor ~= superview.bottomAnchor
-let viewTopConstraint = view.topAnchor ~= superView.topAnchor + 10
+let viewBottomConstraint = view.bottomAnchor =~= superview.bottomAnchor
+let viewTopConstraint = view.topAnchor =~= superView.topAnchor + 10
 ```
 ##### Pin edges to superview's edges with insets
 before:

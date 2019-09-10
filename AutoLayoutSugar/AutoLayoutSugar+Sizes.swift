@@ -19,7 +19,7 @@ public extension UIView {
     /// - Returns: Current view.
     @discardableResult
     func height(_ value: CGFloat = 0.0) -> Self {
-        heightAnchor ~ value
+        heightAnchor =~ value
         return self
     }
 
@@ -31,7 +31,7 @@ public extension UIView {
     /// - Returns: Current view.
     @discardableResult
     func height(as relatedView: UIView) -> Self {
-        heightAnchor ~ relatedView.heightAnchor
+        heightAnchor =~ relatedView.heightAnchor
         return self
     }
 
@@ -43,7 +43,7 @@ public extension UIView {
     /// - Returns: Current view.
     @discardableResult
     func width(_ value: CGFloat = 0.0) -> Self {
-        widthAnchor ~ value
+        widthAnchor =~ value
         return self
     }
 
@@ -55,7 +55,7 @@ public extension UIView {
     /// - Returns: Current view.
     @discardableResult
     func width(as relatedView: UIView) -> Self {
-        widthAnchor ~ relatedView.widthAnchor
+        widthAnchor =~ relatedView.widthAnchor
         return self
     }
 
