@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		184156F9C5C638BD225DE857 /* AutoLayoutSugar+FlexibleMargins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184158CDF74401D946927D3F /* AutoLayoutSugar+FlexibleMargins.swift */; };
+		18415DEF93C711E19E10D856 /* NSLayoutConstraint+Priorities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184158E80A80282D1BE571CB /* NSLayoutConstraint+Priorities.swift */; };
 		D72BFB3623058B5700AA7779 /* AutoLayoutSugar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72BFB2C23058B5700AA7779 /* AutoLayoutSugar.framework */; };
 		D72BFB3B23058B5700AA7779 /* AutoLayoutSugarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72BFB3A23058B5700AA7779 /* AutoLayoutSugarTests.swift */; };
 		D72BFB3D23058B5700AA7779 /* AutoLayoutSugar.h in Headers */ = {isa = PBXBuildFile; fileRef = D72BFB2F23058B5700AA7779 /* AutoLayoutSugar.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		184158CDF74401D946927D3F /* AutoLayoutSugar+FlexibleMargins.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoLayoutSugar+FlexibleMargins.swift"; sourceTree = "<group>"; };
+		184158E80A80282D1BE571CB /* NSLayoutConstraint+Priorities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Priorities.swift"; sourceTree = "<group>"; };
 		D72BFB2C23058B5700AA7779 /* AutoLayoutSugar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AutoLayoutSugar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D72BFB2F23058B5700AA7779 /* AutoLayoutSugar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoLayoutSugar.h; sourceTree = "<group>"; };
 		D72BFB3023058B5700AA7779 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				D79F80F2230A8F57003C1AF7 /* AutoLayoutSugar+Sizes.swift */,
 				D79F80F4230A8F78003C1AF7 /* AutoLayoutSugar+Positioning.swift */,
 				184158CDF74401D946927D3F /* AutoLayoutSugar+FlexibleMargins.swift */,
+				184158E80A80282D1BE571CB /* NSLayoutConstraint+Priorities.swift */,
 			);
 			path = AutoLayoutSugar;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				D72BFB4723058BC200AA7779 /* AutoLayoutSugar.swift in Sources */,
 				D79F80F5230A8F78003C1AF7 /* AutoLayoutSugar+Positioning.swift in Sources */,
 				184156F9C5C638BD225DE857 /* AutoLayoutSugar+FlexibleMargins.swift in Sources */,
+				18415DEF93C711E19E10D856 /* NSLayoutConstraint+Priorities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
