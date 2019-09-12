@@ -17,15 +17,15 @@ public extension UIView {
     ///
     /// - Parameters:
     ///   - relation:       ContentPriority relation: equal, less, greater
-    ///   - axis:           NSLayoutConstraint.Axis
     ///   - relatedView:    Related view
+    ///   - axis:           NSLayoutConstraint.Axis
     ///
     /// - Returns: Current view.
     @discardableResult
     func hugging(
             _ relation: ContentPriority = ContentPriority.equal,
-            axis: NSLayoutConstraint.Axis,
-            as relatedView: UIView
+            than relatedView: UIView,
+            _ axis: NSLayoutConstraint.Axis
     ) -> Self {
         var priorityRaw = relatedView.contentHuggingPriority(for: axis).rawValue
         switch relation {
@@ -51,7 +51,7 @@ public extension UIView {
     @discardableResult
     func hugging(
             _ rawValue: Float,
-            axis: NSLayoutConstraint.Axis
+            _ axis: NSLayoutConstraint.Axis
     ) -> Self {
         let priority = UILayoutPriority(rawValue: rawValue)
         self.setContentHuggingPriority(priority, for: axis)
@@ -66,7 +66,7 @@ public extension UIView {
     ///
     /// - Returns: Current view.
     @discardableResult
-    func hugging(_ priority: UILayoutPriority, axis: NSLayoutConstraint.Axis) -> Self {
+    func hugging(_ priority: UILayoutPriority, _ axis: NSLayoutConstraint.Axis) -> Self {
         self.setContentHuggingPriority(priority, for: axis)
         return self
     }
@@ -75,15 +75,15 @@ public extension UIView {
     ///
     /// - Parameters:
     ///   - relation:       ContentPriority relation: equal, less, greater
-    ///   - axis:           NSLayoutConstraint.Axis
     ///   - relatedView:    Related view
+    ///   - axis:           NSLayoutConstraint.Axis
     ///
     /// - Returns: Current view.
     @discardableResult
     func compressionResistance(
             _ relation: ContentPriority = ContentPriority.equal,
-            axis: NSLayoutConstraint.Axis,
-            as relatedView: UIView
+            than relatedView: UIView,
+            _ axis: NSLayoutConstraint.Axis
     ) -> Self {
         var priorityRaw = relatedView.contentCompressionResistancePriority(for: axis).rawValue
         switch relation {
@@ -107,7 +107,7 @@ public extension UIView {
     ///
     /// - Returns: Current view.
     @discardableResult
-    func compressionResistance(_ rawValue: Float, axis: NSLayoutConstraint.Axis) -> Self {
+    func compressionResistance(_ rawValue: Float, _ axis: NSLayoutConstraint.Axis) -> Self {
         let priority = UILayoutPriority(rawValue: rawValue)
         self.setContentCompressionResistancePriority(priority, for: axis)
         return self
@@ -121,7 +121,7 @@ public extension UIView {
     ///
     /// - Returns: Current view.
     @discardableResult
-    func compressionResistance(_ priority: UILayoutPriority, axis: NSLayoutConstraint.Axis) -> Self {
+    func compressionResistance(_ priority: UILayoutPriority, _ axis: NSLayoutConstraint.Axis) -> Self {
         self.setContentCompressionResistancePriority(priority, for: axis)
         return self
     }
