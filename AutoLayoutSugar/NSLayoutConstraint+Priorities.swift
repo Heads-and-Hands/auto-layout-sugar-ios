@@ -21,12 +21,24 @@ public prefix func <~ (constraint: NSLayoutConstraint) -> UILayoutPriority {
 
 public extension NSLayoutConstraint {
 
+    /// Set constraint priority with raw value
+    ///
+    /// - Parameters:
+    ///   - rawValue:   CGFloat priority value
+    ///
+    /// - Returns: Current view.
     @discardableResult
     func priority(_ priorityRaw: Float) -> Self {
         self.priority = UILayoutPriority(rawValue: priorityRaw)
         return self
     }
 
+    /// Set constraint priority
+    ///
+    /// - Parameters:
+    ///   - priority:   UILayoutPriority priority value
+    ///
+    /// - Returns: Current view.
     @discardableResult
     func priority(_ priority: UILayoutPriority) -> Self {
         self.priority = priority
