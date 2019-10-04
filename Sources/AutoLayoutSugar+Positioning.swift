@@ -6,7 +6,7 @@
 //  Copyright © 2019 Heads and hands. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Current view position modificators
 public extension UIView {

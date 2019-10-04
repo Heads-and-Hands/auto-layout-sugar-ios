@@ -3,6 +3,7 @@ tignore contributors: remember to update Global/Xcode.gitignore, Objective-C.git
 .DS_Store
 
 ## Build generated
+.build/
 build/
 DerivedData/
 

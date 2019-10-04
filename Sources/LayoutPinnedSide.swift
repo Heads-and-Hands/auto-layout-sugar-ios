@@ -6,7 +6,7 @@
 //  Copyright © 2019 Heads and hands. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 internal enum CommonSideRawValues {
     static let top: String = "top"

@@ -3,12 +3,20 @@
 
 [![Language: Swift 4.0](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat")](https://developer.apple.com/swift) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-### Installation via Carthage
+### Carthage
+
 [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate this framework into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
 github "Heads-and-Hands/auto-layout-sugar-ios"
 ```
+
+### Swift Package Manager (required Xcode 11)
+
+1. Select File > Swift Packages > Add Package Dependency. Enter `https://github.com/Heads-and-Hands/auto-layout-sugar-ios` in the "Choose Package Repository" dialog.
+2. In the next page, specify the version resolving rule as "Up to Next Major" with "1.0.6" as its earliest version.
+3. After Xcode checking out the source and resolving the version, you can choose the "AutoLayoutSugar" library and add it to your app target.
+
 
 ### Usage
 ##### Prepare for auto layout

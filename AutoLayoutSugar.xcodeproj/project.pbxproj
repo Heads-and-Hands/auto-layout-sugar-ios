@@ -70,9 +70,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D413EA4E2344E59E0017DCB1 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				D72BFB4623058BC200AA7779 /* AutoLayoutSugar.swift */,
+				D72BFB4823058D8E00AA7779 /* LayoutPinnedSide.swift */,
+				D72BFB4A230597EF00AA7779 /* AutoLayoutSugarOperations.swift */,
+				D72BFB4C2305991D00AA7779 /* NSLayoutConstraint+Activate.swift */,
+				D72BFB4E23059E8300AA7779 /* AutoLayoutSugar+SafeAnchors.swift */,
+				D79F80F2230A8F57003C1AF7 /* AutoLayoutSugar+Sizes.swift */,
+				D79F80F4230A8F78003C1AF7 /* AutoLayoutSugar+Positioning.swift */,
+				184158CDF74401D946927D3F /* AutoLayoutSugar+FlexibleMargins.swift */,
+				184158E80A80282D1BE571CB /* NSLayoutConstraint+Priorities.swift */,
+				18415206B9DF37306AFCE665 /* AutoLayoutSugar+ContentPriority.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		D413EA4F2344E5B40017DCB1 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D72BFB3A23058B5700AA7779 /* AutoLayoutSugarTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		D72BFB2223058B5700AA7779 = {
 			isa = PBXGroup;
 			children = (
+				D413EA4F2344E5B40017DCB1 /* Tests */,
+				D413EA4E2344E59E0017DCB1 /* Sources */,
 				D72BFB2E23058B5700AA7779 /* AutoLayoutSugar */,
 				D72BFB3923058B5700AA7779 /* AutoLayoutSugarTests */,
 				D72BFB2D23058B5700AA7779 /* Products */,
@@ -93,16 +120,6 @@
 			children = (
 				D72BFB2F23058B5700AA7779 /* AutoLayoutSugar.h */,
 				D72BFB3023058B5700AA7779 /* Info.plist */,
-				D72BFB4623058BC200AA7779 /* AutoLayoutSugar.swift */,
-				D72BFB4823058D8E00AA7779 /* LayoutPinnedSide.swift */,
-				D72BFB4A230597EF00AA7779 /* AutoLayoutSugarOperations.swift */,
-				D72BFB4C2305991D00AA7779 /* NSLayoutConstraint+Activate.swift */,
-				D72BFB4E23059E8300AA7779 /* AutoLayoutSugar+SafeAnchors.swift */,
-				D79F80F2230A8F57003C1AF7 /* AutoLayoutSugar+Sizes.swift */,
-				D79F80F4230A8F78003C1AF7 /* AutoLayoutSugar+Positioning.swift */,
-				184158CDF74401D946927D3F /* AutoLayoutSugar+FlexibleMargins.swift */,
-				184158E80A80282D1BE571CB /* NSLayoutConstraint+Priorities.swift */,
-				18415206B9DF37306AFCE665 /* AutoLayoutSugar+ContentPriority.swift */,
 			);
 			path = AutoLayoutSugar;
 			sourceTree = "<group>";
@@ -110,7 +127,6 @@
 		D72BFB3923058B5700AA7779 /* AutoLayoutSugarTests */ = {
 			isa = PBXGroup;
 			children = (
-				D72BFB3A23058B5700AA7779 /* AutoLayoutSugarTests.swift */,
 				D72BFB3C23058B5700AA7779 /* Info.plist */,
 			);
 			path = AutoLayoutSugarTests;
