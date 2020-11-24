@@ -73,9 +73,9 @@ public extension UIView {
         layout(with: .safeArea, closure)
     }
 
-    ///
-    /// MARK: - [DEPRECATED} Safe anchors getters, returns safe area if `isSafeAreaEnabled=true` (if used in closure of `safeArea:` method)
-    ///         and returns regular anchor if `isSafeAreaEnabled=false`
+    //
+    // MARK: - [DEPRECATED} Safe anchors getters, returns safe area if `isSafeAreaEnabled=true` (if used in closure of `safeArea:` method)
+    //         and returns regular anchor if `isSafeAreaEnabled=false`
 
     @available(*, deprecated)
     var safeTopAnchor: NSLayoutYAxisAnchor {
@@ -140,9 +140,9 @@ public extension UIView {
         }
     }
 
-    ///
-    /// MARK: - Anchors getters for current layout guide
-    ///         and returns regular anchor if `isSafeAreaEnabled=false`
+    //
+    // MARK: - Anchors getters for current layout guide
+    //         and returns regular anchor if `isSafeAreaEnabled=false`
 
     internal var guidedTopAnchor: NSLayoutYAxisAnchor {
         currentLayoutGuide?.topAnchor ?? topAnchor
