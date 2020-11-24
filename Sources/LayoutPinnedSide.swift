@@ -17,8 +17,14 @@ internal enum CommonSideRawValues {
     static let bottom: String = "bottom"
 }
 
-internal protocol LayoutSideProtocol {
-    var rawValue: String { get }
+public protocol LayoutSideProtocol {
+
+}
+
+internal extension LayoutSideProtocol {
+    var rawValue: String {
+        ""
+    }
 }
 
 /// LayoutPinnedSide used when we need to determine inset from concrete side

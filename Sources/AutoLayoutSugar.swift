@@ -130,11 +130,7 @@ public extension UIView {
     @discardableResult
     private func pinSide(_ side: LayoutSideProtocol, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        var offset: CGFloat = 0
-
-        if let layoutPinnedSide = side as? LayoutPinnedSide {
-            offset = layoutPinnedSide.offset
-        }
+        let offset: CGFloat = (side as? LayoutPinnedSide)?.offset ?? 0
 
         switch side.rawValue {
         case CommonSideRawValues.top:
