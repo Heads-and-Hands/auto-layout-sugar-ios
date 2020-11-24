@@ -31,42 +31,46 @@ public struct LayoutGuideAttribute {
 // MARK: - Modifications
 
 public func + <T>(lhs: NSLayoutAnchor<T>, rhs: CGFloat) -> ConstraintAttribute<T> {
-    return ConstraintAttribute(anchor: lhs, const: rhs)
+    ConstraintAttribute(anchor: lhs, const: rhs)
 }
 
 public func + (lhs: UILayoutSupport, rhs: CGFloat) -> LayoutGuideAttribute {
-    return LayoutGuideAttribute(guide: lhs, const: rhs)
+    LayoutGuideAttribute(guide: lhs, const: rhs)
 }
 
 public func + <T>(lhs: ConstraintAttribute<T>, rhs: CGFloat) -> ConstraintAttribute<T> {
-    return ConstraintAttribute(anchor: lhs.anchor, const: lhs.const + rhs)
+    ConstraintAttribute(anchor: lhs.anchor, const: lhs.const + rhs)
 }
 
 public func - <T>(lhs: NSLayoutAnchor<T>, rhs: CGFloat) -> ConstraintAttribute<T> {
-    return ConstraintAttribute(anchor: lhs, const: -rhs)
+    ConstraintAttribute(anchor: lhs, const: -rhs)
 }
 
 public func - (lhs: UILayoutSupport, rhs: CGFloat) -> LayoutGuideAttribute {
-    return LayoutGuideAttribute(guide: lhs, const: -rhs)
+    LayoutGuideAttribute(guide: lhs, const: -rhs)
 }
 
 public func - <T>(lhs: ConstraintAttribute<T>, rhs: CGFloat) -> ConstraintAttribute<T> {
-    return ConstraintAttribute(anchor: lhs.anchor, const: lhs.const - rhs)
+    ConstraintAttribute(anchor: lhs.anchor, const: lhs.const - rhs)
 }
 
 public func * <T>(lhs: NSLayoutAnchor<T>, rhs: CGFloat) -> ConstraintMultiplierAttribute<T> {
-    return ConstraintMultiplierAttribute(anchor: lhs, multiplier: rhs)
+    ConstraintMultiplierAttribute(anchor: lhs, multiplier: rhs)
 }
 
 public func * (lhs: UILayoutSupport, rhs: CGFloat) -> LayoutGuideMultiplierAttribute {
-    return LayoutGuideMultiplierAttribute(guide: lhs, multiplier: rhs)
+    LayoutGuideMultiplierAttribute(guide: lhs, multiplier: rhs)
 }
 
 public func * <T>(lhs: ConstraintMultiplierAttribute<T>, rhs: CGFloat) -> ConstraintMultiplierAttribute<T> {
-    return ConstraintMultiplierAttribute(anchor: lhs.anchor, multiplier: rhs)
+    ConstraintMultiplierAttribute(anchor: lhs.anchor, multiplier: rhs)
 }
 
+//
 // MARK: - Equatable operations
+//         [!!!] All operations below create new constraint with default (required) priority.
+//         Mutating a priority from required to not on an installed constraint will crash your app in runtime
+//
 
 @discardableResult
 public func ~ <T>(lhs: NSLayoutAnchor<T>, rhs: NSLayoutAnchor<T>) -> NSLayoutConstraint {
@@ -116,7 +120,11 @@ public func ~ (lhs: NSLayoutDimension, rhs: NSLayoutDimension) -> NSLayoutConstr
     return constraint.activate()
 }
 
-// MARK: - Less/Greather than operations
+//
+// MARK: - Less/Greater than operations
+//         [!!!] All operations below create new constraint with default (required) priority.
+//         Mutating a priority from required to not on an installed constraint will crash your app in runtime
+//
 
 @discardableResult
 public func <~ <T>(lhs: NSLayoutAnchor<T>, rhs: ConstraintAttribute<T>) -> NSLayoutConstraint {
