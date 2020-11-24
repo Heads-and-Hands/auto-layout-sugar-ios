@@ -8,9 +8,21 @@
 
 import UIKit
 
-/// Current view sizes modificators
+/// Current view sizes modifiers
 public extension UIView {
 
+    /// Update current view size constraints with new value
+    ///
+    /// - Parameters:
+    ///   - value:          CGSize value of new size
+    ///
+    /// - Returns: Current view.
+    @discardableResult
+    func size(_ value: CGSize) -> Self {
+        heightAnchor ~ value.height
+        widthAnchor ~ value.width
+        return self
+    }
     /// Update current view height constraint with new value
     ///
     /// - Parameters:
