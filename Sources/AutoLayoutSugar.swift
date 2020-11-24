@@ -31,7 +31,7 @@ public extension UIView {
     /// - Returns: Current view.
     @discardableResult
     func pinToSuperview(with insets: UIEdgeInsets = .zero) -> Self {
-        return pin(
+        pin(
             [
                 .top(insets.top),
                 .left(insets.left),
@@ -105,7 +105,7 @@ public extension UIView {
     /// - Returns: Current view.
     @discardableResult
     func pin(_ side: LayoutSideDirection, to relatedView: UIView? = nil) -> Self {
-        return pinSide(side as LayoutSideProtocol, to: relatedView)
+        pinSide(side as LayoutSideProtocol, to: relatedView)
     }
 
     /// Pin current view to concrete side of related view with inset (side contains inset value).
@@ -117,7 +117,7 @@ public extension UIView {
     /// - Returns: Current view.
     @discardableResult
     func pin(_ side: LayoutPinnedSide, to relatedView: UIView? = nil) -> Self {
-        return pinSide(side as LayoutSideProtocol, to: relatedView)
+        pinSide(side as LayoutSideProtocol, to: relatedView)
     }
 
     /// PRIVATE Pin current view to concrete side of related view.
@@ -130,25 +130,21 @@ public extension UIView {
     @discardableResult
     private func pinSide(_ side: LayoutSideProtocol, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        var offset: CGFloat = 0
-
-        if let layoutPinnedSide = side as? LayoutPinnedSide {
-            offset = layoutPinnedSide.offset
-        }
+        let offset: CGFloat = (side as? LayoutPinnedSide)?.offset ?? 0
 
         switch side.rawValue {
         case CommonSideRawValues.top:
-            safeTopAnchor ~ relatedView.safeTopAnchor + offset
+            guidedTopAnchor ~ relatedView.guidedTopAnchor + offset
         case CommonSideRawValues.left:
-            safeLeadingAnchor ~ relatedView.safeLeadingAnchor + offset
+            guidedLeadingAnchor ~ relatedView.guidedLeadingAnchor + offset
         case CommonSideRawValues.hCenter:
-            safeCenterXAnchor ~ relatedView.safeCenterXAnchor + offset
+            guidedCenterXAnchor ~ relatedView.guidedCenterXAnchor + offset
         case CommonSideRawValues.vCenter:
-            safeCenterYAnchor ~ relatedView.safeCenterYAnchor + offset
+            guidedCenterYAnchor ~ relatedView.guidedCenterYAnchor + offset
         case CommonSideRawValues.right:
-            safeTrailingAnchor ~ relatedView.safeTrailingAnchor - offset
+            guidedTrailingAnchor ~ relatedView.guidedTrailingAnchor - offset
         case CommonSideRawValues.bottom:
-            safeBottomAnchor ~ relatedView.safeBottomAnchor - offset
+            guidedBottomAnchor ~ relatedView.guidedBottomAnchor - offset
         default:
             break
         }
@@ -173,11 +169,11 @@ internal extension UIView {
     func anchorX(for side: LayoutPinnedSide) -> NSLayoutXAxisAnchor {
         switch side {
         case .right:
-            return safeTrailingAnchor
+            return guidedTrailingAnchor
         case .hCenter:
-            return safeCenterXAnchor
+            return guidedCenterXAnchor
         case .left:
-            return safeLeadingAnchor
+            return guidedLeadingAnchor
         default:
             fatalError("Something went wrong")
         }
@@ -186,11 +182,11 @@ internal extension UIView {
     func anchorX(for side: LayoutSideDirection) -> NSLayoutXAxisAnchor {
         switch side {
         case .right:
-            return safeTrailingAnchor
+            return guidedTrailingAnchor
         case .hCenter:
-            return safeCenterXAnchor
+            return guidedCenterXAnchor
         case .left:
-            return safeLeadingAnchor
+            return guidedLeadingAnchor
         default:
             fatalError("Something went wrong")
         }
@@ -199,11 +195,11 @@ internal extension UIView {
     func anchorY(for side: LayoutPinnedSide) -> NSLayoutYAxisAnchor {
         switch side {
         case .top:
-            return safeTopAnchor
+            return guidedTopAnchor
         case .vCenter:
-            return safeCenterYAnchor
+            return guidedCenterYAnchor
         case .bottom:
-            return safeBottomAnchor
+            return guidedBottomAnchor
         default:
             fatalError("Something went wrong")
         }
@@ -211,11 +207,11 @@ internal extension UIView {
     func anchorY(for side: LayoutSideDirection) -> NSLayoutYAxisAnchor {
         switch side {
         case .top:
-            return safeTopAnchor
+            return guidedTopAnchor
         case .vCenter:
-            return safeCenterYAnchor
+            return guidedCenterYAnchor
         case .bottom:
-            return safeBottomAnchor
+            return guidedBottomAnchor
         default:
             fatalError("Something went wrong")
         }

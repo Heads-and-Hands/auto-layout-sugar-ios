@@ -13,11 +13,11 @@ public struct FlexibleMargin {
 prefix operator >>=
 @discardableResult
 public prefix func >>= (points: CGFloat) -> FlexibleMargin {
-    return FlexibleMargin(points: points, relation: .greaterThanOrEqual)
+    FlexibleMargin(points: points, relation: .greaterThanOrEqual)
 }
 
 prefix operator <<=
 @discardableResult
 public prefix func <<= (points: CGFloat) -> FlexibleMargin {
-    return FlexibleMargin(points: points, relation: .lessThanOrEqual)
+    FlexibleMargin(points: points, relation: .lessThanOrEqual)
 }

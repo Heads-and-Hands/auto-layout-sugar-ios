@@ -16,4 +16,10 @@ public extension NSLayoutConstraint {
         return self
     }
 
+    @discardableResult
+    func deactivate() -> Self {
+        isActive = false
+        return self
+    }
+
 }
