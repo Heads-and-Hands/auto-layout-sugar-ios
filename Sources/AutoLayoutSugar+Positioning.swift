@@ -22,7 +22,7 @@ public extension UIView {
     @discardableResult
     func centerY(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeCenterYAnchor.constraint(equalTo: relatedView.safeCenterYAnchor, constant: inset).priority(priority).activate()
+        guidedCenterYAnchor.constraint(equalTo: relatedView.guidedCenterYAnchor, constant: inset).priority(priority).activate()
         return self
     }
 
@@ -37,7 +37,7 @@ public extension UIView {
     @discardableResult
     func centerX(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeCenterXAnchor.constraint(equalTo: relatedView.safeCenterXAnchor, constant: inset).priority(priority).activate()
+        guidedCenterXAnchor.constraint(equalTo: relatedView.guidedCenterXAnchor, constant: inset).priority(priority).activate()
         return self
     }
 
@@ -53,8 +53,8 @@ public extension UIView {
     @discardableResult
     func center(x xInset: CGFloat = 0.0, y yInset: CGFloat = 0.0, to relatedView: UIView? = nil) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeCenterXAnchor ~ relatedView.safeCenterXAnchor + xInset
-        safeCenterYAnchor ~ relatedView.safeCenterYAnchor + yInset
+        guidedCenterXAnchor ~ relatedView.guidedCenterXAnchor + xInset
+        guidedCenterYAnchor ~ relatedView.guidedCenterYAnchor + yInset
         return self
     }
 
@@ -69,7 +69,7 @@ public extension UIView {
     @discardableResult
     func left(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeLeadingAnchor.constraint(equalTo: relatedView.safeLeadingAnchor, constant: inset).priority(priority).activate()
+        guidedLeadingAnchor.constraint(equalTo: relatedView.guidedLeadingAnchor, constant: inset).priority(priority).activate()
         return self
     }
 
@@ -89,15 +89,15 @@ public extension UIView {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
         switch relation {
         case .greaterThanOrEqual:
-            safeLeadingAnchor.constraint(
-                    greaterThanOrEqualTo: relatedView.safeLeadingAnchor,
+            guidedLeadingAnchor.constraint(
+                    greaterThanOrEqualTo: relatedView.guidedLeadingAnchor,
                     constant: flexibleMargin.points ?? 0
             )
                     .priority(priority)
                     .activate()
         case .lessThanOrEqual:
-            safeLeadingAnchor.constraint(
-                            lessThanOrEqualTo: relatedView.safeLeadingAnchor,
+            guidedLeadingAnchor.constraint(
+                            lessThanOrEqualTo: relatedView.guidedLeadingAnchor,
                             constant: flexibleMargin.points ?? 0
                     )
                     .priority(priority)
@@ -120,7 +120,7 @@ public extension UIView {
     @discardableResult
     func left(to side: LayoutPinnedSide, of relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeLeadingAnchor.constraint(equalTo: relatedView.anchorX(for: side), constant: side.offset).priority(priority).activate()
+        guidedLeadingAnchor.constraint(equalTo: relatedView.anchorX(for: side), constant: side.offset).priority(priority).activate()
         return self
     }
 
@@ -135,7 +135,7 @@ public extension UIView {
     @discardableResult
     func left(to side: LayoutSideDirection, of relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeLeadingAnchor.constraint(equalTo: relatedView.anchorX(for: side)).priority(priority).activate()
+        guidedLeadingAnchor.constraint(equalTo: relatedView.anchorX(for: side)).priority(priority).activate()
         return self
     }
 
@@ -150,7 +150,7 @@ public extension UIView {
     @discardableResult
     func right(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTrailingAnchor.constraint(equalTo: relatedView.safeTrailingAnchor, constant: -inset).priority(priority).activate()
+        guidedTrailingAnchor.constraint(equalTo: relatedView.guidedTrailingAnchor, constant: -inset).priority(priority).activate()
         return self
     }
 
@@ -170,15 +170,15 @@ public extension UIView {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
         switch relation {
         case .greaterThanOrEqual:
-            safeTrailingAnchor.constraint(
-                            greaterThanOrEqualTo: relatedView.safeTrailingAnchor,
+            guidedTrailingAnchor.constraint(
+                            greaterThanOrEqualTo: relatedView.guidedTrailingAnchor,
                             constant: flexibleMargin.points ?? 0
                     )
                     .priority(priority)
                     .activate()
         case .lessThanOrEqual:
-            safeTrailingAnchor.constraint(
-                            lessThanOrEqualTo: relatedView.safeTrailingAnchor,
+            guidedTrailingAnchor.constraint(
+                            lessThanOrEqualTo: relatedView.guidedTrailingAnchor,
                             constant: flexibleMargin.points ?? 0
                     )
                     .priority(priority)
@@ -201,7 +201,7 @@ public extension UIView {
     @discardableResult
     func right(to side: LayoutPinnedSide, of relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTrailingAnchor.constraint(equalTo: relatedView.anchorX(for: side), constant: -side.offset).priority(priority).activate()
+        guidedTrailingAnchor.constraint(equalTo: relatedView.anchorX(for: side), constant: -side.offset).priority(priority).activate()
         return self
     }
 
@@ -216,7 +216,7 @@ public extension UIView {
     @discardableResult
     func right(to side: LayoutSideDirection, of relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTrailingAnchor.constraint(equalTo: relatedView.anchorX(for: side)).priority(priority).activate()
+        guidedTrailingAnchor.constraint(equalTo: relatedView.anchorX(for: side)).priority(priority).activate()
         return self
     }
 
@@ -231,7 +231,7 @@ public extension UIView {
     @discardableResult
     func top(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTopAnchor.constraint(equalTo: relatedView.safeTopAnchor, constant: inset).priority(priority).activate()
+        guidedTopAnchor.constraint(equalTo: relatedView.guidedTopAnchor, constant: inset).priority(priority).activate()
         return self
     }
 
@@ -251,15 +251,15 @@ public extension UIView {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
         switch relation {
         case .greaterThanOrEqual:
-            safeTopAnchor.constraint(
-                            greaterThanOrEqualTo: relatedView.safeTopAnchor,
+            guidedTopAnchor.constraint(
+                            greaterThanOrEqualTo: relatedView.guidedTopAnchor,
                             constant: flexibleMargin.points ?? 0
                     )
                     .priority(priority)
                     .activate()
         case .lessThanOrEqual:
-            safeTopAnchor.constraint(
-                            lessThanOrEqualTo: relatedView.safeTopAnchor,
+            guidedTopAnchor.constraint(
+                            lessThanOrEqualTo: relatedView.guidedTopAnchor,
                             constant: flexibleMargin.points ?? 0
                     )
                     .priority(priority)
@@ -282,7 +282,7 @@ public extension UIView {
     @discardableResult
     func top(to side: LayoutPinnedSide, of relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTopAnchor.constraint(equalTo: relatedView.anchorY(for: side), constant: side.offset).priority(priority).activate()
+        guidedTopAnchor.constraint(equalTo: relatedView.anchorY(for: side), constant: side.offset).priority(priority).activate()
         return self
     }
 
@@ -297,7 +297,7 @@ public extension UIView {
     @discardableResult
     func top(to side: LayoutSideDirection, of relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeTopAnchor.constraint(equalTo: relatedView.anchorY(for: side)).priority(priority).activate()
+        guidedTopAnchor.constraint(equalTo: relatedView.anchorY(for: side)).priority(priority).activate()
         return self
     }
 
@@ -312,7 +312,7 @@ public extension UIView {
     @discardableResult
     func bottom(_ inset: CGFloat = 0.0, to relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeBottomAnchor.constraint(equalTo: relatedView.safeBottomAnchor, constant: -inset).priority(priority).activate()
+        guidedBottomAnchor.constraint(equalTo: relatedView.guidedBottomAnchor, constant: -inset).priority(priority).activate()
         return self
     }
 
@@ -332,15 +332,15 @@ public extension UIView {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
         switch relation {
         case .greaterThanOrEqual:
-            safeBottomAnchor.constraint(
-                            greaterThanOrEqualTo: relatedView.safeBottomAnchor,
+            guidedBottomAnchor.constraint(
+                            greaterThanOrEqualTo: relatedView.guidedBottomAnchor,
                             constant: flexibleMargin.points ?? 0
                     )
                     .priority(priority)
                     .activate()
         case .lessThanOrEqual:
-            safeBottomAnchor.constraint(
-                            lessThanOrEqualTo: relatedView.safeBottomAnchor,
+            guidedBottomAnchor.constraint(
+                            lessThanOrEqualTo: relatedView.guidedBottomAnchor,
                             constant: flexibleMargin.points ?? 0
                     )
                     .priority(priority)
@@ -363,7 +363,7 @@ public extension UIView {
     @discardableResult
     func bottom(to side: LayoutPinnedSide, of relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeBottomAnchor.constraint(equalTo: relatedView.anchorY(for: side), constant: -side.offset).priority(priority).activate()
+        guidedBottomAnchor.constraint(equalTo: relatedView.anchorY(for: side), constant: -side.offset).priority(priority).activate()
         return self
     }
 
@@ -379,7 +379,7 @@ public extension UIView {
     @discardableResult
     func bottom(to side: LayoutSideDirection, of relatedView: UIView? = nil, priority: UILayoutPriority = .required) -> Self {
         let relatedView = self.getRelatedViewOrParent(with: relatedView)
-        safeBottomAnchor.constraint(equalTo: relatedView.anchorY(for: side)).priority(priority).activate()
+        guidedBottomAnchor.constraint(equalTo: relatedView.anchorY(for: side)).priority(priority).activate()
         return self
     }
 }
